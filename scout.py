@@ -44,7 +44,7 @@ def next_move(view, history, (x, y), direction, turn):
         else:
             last = history[-1]
             return (last - x, last - y)
-            
+
     return move
 
 def test_next():
