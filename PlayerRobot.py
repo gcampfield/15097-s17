@@ -30,13 +30,13 @@ class player_robot(Robot):
     def __init__(self, args):
         super(self.__class__, self).__init__(args)
         ##############################################
-        # A couple of variables - read what they do! # 
+        # A couple of variables - read what they do! #
         #                                            #
         # README - My_Robot                          #
         ##############################################
-        self.toHome = []             
-        self.numturns = 0            
-        self.goinghome = False;      
+        self.toHome = []
+        self.numturns = 0
+        self.goinghome = False
         self.targetPath = None
         self.targetDest = (0,0)
         self.lastRandomAction = None
@@ -92,7 +92,7 @@ class player_robot(Robot):
         # Search for resources
         # Updates self.targetPath, sefl.targetDest
         self.ViewScan(view)
-        
+
         # If you can't find any resources...go in a random direction!
         actionToTake = None
         if(self.targetPath == None):
@@ -220,8 +220,7 @@ class player_robot(Robot):
 
         # Update destination using path
         self.targetDest = (self.targetDest[0]-x, self.targetDest[1]-y)
-        # We will continue along our path    
+        # We will continue along our path
         self.targetPath = self.targetPath[1:]
 
         return actionToTake
-
