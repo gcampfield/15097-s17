@@ -2,7 +2,7 @@ from __future__ import division, print_function
 # functions to be used by the scout robot
 import random
 import math
-from constants import TileType
+from constants import TileType, Actions
 
 zig_size = 2
 num_scouts = 16
@@ -43,19 +43,13 @@ def next_move(view, history, (x, y), direction, turn):
             move = normals.pop(i)
         else:
             last = history[-1]
-            return (last - x, last - y)
+            return move_to_constant(last - x, last - y)
 
-    return move
+    return move_to_constant(*move)
 
-def test_next():
-    # test next move function
-    for d in range(num_scouts):
-        # print("=" * 25 + " " + str(d) + " " + "=" * 25)
-        curr = (0, 0)
-        for i in range(1, 1000):
-            move = next_move(curr, d, i)
-            # print(move, end=" => ")
-            assert(-1 <= move[0] <= 1)
-            assert(-1 <= move[1] <= 1)
-            curr = (curr[0] + move[0], curr[1] + move[1])
-            # print(curr)
+def move_to_constant(x, y):
+    return [
+        [None,           Actions.MOVE_E,  Actions.MOVE_W],
+        [Actions.MOVE_N, Actions.MOVE_NE, Actions.MOVE_NW],
+        [Actions.MOVE_S, Actions.MOVE_SE, Actions.MOVE_SW]
+    ][y][x]
