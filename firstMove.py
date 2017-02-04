@@ -1,17 +1,15 @@
 import random
 
-from scout import next_move
+from scout import next_move, num_scouts
 
 class Jobs:
     SCOUT = 0
     COLLECTOR = 1
 
-nScouts = 16
-
 def firstMove(self, view):
     total = view[2][1][1] + view[1][1][1] + view[1][2][1] + view[1][3][1] + view[2][3][1] + view[3][3][1] + view[3][2][1] + view[3][1][1]
     self.direction = total
-    if total <= 16:
+    if total <= num_scouts:
         self.job = Jobs.SCOUT
         move = next_move(view, [], (0, 0), self.direction, 1)
         return makeMove((move, Actions.DROP_NONE))
