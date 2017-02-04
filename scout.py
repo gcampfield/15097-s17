@@ -18,6 +18,13 @@ def round_away(x):
     if x < -1: return -1
     return x
 
+def move_to_constant(x, y):
+    return [
+        [None,           Actions.MOVE_E,  Actions.MOVE_W],
+        [Actions.MOVE_N, Actions.MOVE_NE, Actions.MOVE_NW],
+        [Actions.MOVE_S, Actions.MOVE_SE, Actions.MOVE_SW]
+    ][y][x]
+
 def next_move(view, history, (x, y), direction, turn):
     # returns the next step, disregarding mountains
     angle = (direction / num_scouts) * 2 * math.pi
@@ -46,10 +53,3 @@ def next_move(view, history, (x, y), direction, turn):
             return move_to_constant(last - x, last - y)
 
     return move_to_constant(*move)
-
-def move_to_constant(x, y):
-    return [
-        [None,           Actions.MOVE_E,  Actions.MOVE_W],
-        [Actions.MOVE_N, Actions.MOVE_NE, Actions.MOVE_NW],
-        [Actions.MOVE_S, Actions.MOVE_SE, Actions.MOVE_SW]
-    ][y][x]
