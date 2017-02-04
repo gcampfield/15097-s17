@@ -104,7 +104,7 @@ def run_game(game, robots, board):
                     print (board.get_score())
                 exit()
         game.append((board.get_elements(), board.get_score()))
-#         board.display()
+#        board.display()
 #         print
 
 main()
