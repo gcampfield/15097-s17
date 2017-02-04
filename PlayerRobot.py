@@ -3,9 +3,6 @@ from constants import Actions, TileType
 import random
 import time
 
-
-
-
 ##########################################################################
 # One of your team members, Chris Hung, has made a starter bot for you.  #
 # Unfortunately, he is busy on vacation so he is unable to aid you with  #
@@ -21,10 +18,6 @@ import time
 # Search the README with these titles to see the descriptions.           #
 ##########################################################################
 
-
-
-
-
 # !!!!! Make your changes within here !!!!!
 class player_robot(Robot):
     def __init__(self, args):
@@ -36,14 +29,9 @@ class player_robot(Robot):
         ##############################################
         self.toHome = []
         self.numturns = 0
-        self.goinghome = False
+        self.goinghome = False;
         self.targetPath = None
         self.targetDest = (0,0)
-        self.lastRandomAction = None
-        self.lastRandomActionN = 0
-
-	self.x = 0
-	self.y = 0
 
     # A couple of helper functions (Implemented at the bottom)
     def OppositeDir(self, direction):
@@ -67,14 +55,13 @@ class player_robot(Robot):
     def get_move(self, view):
 
         # Returns home if you have one resource
-        if (self.get_turn() - self.numturns <= len(self.toHome) + 5):
+        if (self.held_value() > 0):
             self.goinghome = True
         if(self.storage_remaining() == 0):
             self.goinghome = True
 
         # How to navigate back home
         if(self.goinghome):
-            self.lastRandomAction = None
             # You are t home
             if(self.toHome == []):
                 self.goinghome = False
@@ -96,12 +83,7 @@ class player_robot(Robot):
         # If you can't find any resources...go in a random direction!
         actionToTake = None
         if(self.targetPath == None):
-            if (self.lastRandomAction == None or self.lastRandomActionN > 1):
-                actionToTake = self.FindRandomPath(view)
-                self.lastRandomAction = actionToTake
-            else:
-                actionToTake = self.lastRandomAction
-                self.lastRandomActionN += 1
+            actionToTake = self.FindRandomPath(view)
 
         # Congrats! You have found a resource
         elif(self.targetPath == []):
